@@ -1,0 +1,33 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+    plugins {}
+    resolutionStrategy {
+        eachPlugin {
+            if (it.requested.id.getNamespace() == 'com.huawei.agconnect') {
+                println ">> ${it.requested.id.id}"
+                if (it.requested.id.id == 'com.huawei.agconnect.agcp') {
+                    it.useModule('com.huawei.agconnect:agcp:1.7.2.300')
+                }
+                println ">> ${it.target}"
+            } else {
+                println ">  ${it.target}"
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {url 'https://developer.huawei.com/repo/'}
+    }
+
+}
+rootProject.name = "huaweiLiveness"
+include ':app'
